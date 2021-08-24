@@ -36,6 +36,9 @@ build/Release
 node_modules/
 jspm_packages/
 
+#my app packager
+my-app-win32-x64/
+
 # TypeScript v1 declaration files
 typings/
 
