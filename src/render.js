@@ -1,7 +1,6 @@
 //run this with npm start on terminal
-
-
 //buttons
+
 const videoElement = document.querySelector('video');
 const startBtn = document.getElementById('startBtn');
 const stopBtn = document.getElementById('stopBtn');
@@ -9,21 +8,34 @@ const videoSelectBtn = document.getElementById('videoSelectBtn');
 
 videoSelectBtn.onclick = getVideoSources;
 
+let tempstart = false;
 startBtn.onclick= e=>{
-    mediaRecorder.start();
-    startBtn.classList.add('is-danger');
-    startBtn.innerText = 'Recording';
+    if(tempstart==false)
+    {
+        mediaRecorder.start();
+        startBtn.classList.add('is-danger');
+        startBtn.innerText = 'Stop-Recording';
+        tempstart = true;
+    }else{
+        mediaRecorder.stop();
+        startBtn.classList.remove('is-danger');
+        startBtn.innerText = 'Start'; 
+        tempstart = false;
+    }
+    
 };
 
-stopBtn.onclick= e =>{
-    mediaRecorder.stop();
-    startBtn.classList.remove('is-danger');
-    startBtn.innerText = 'Start';
-};
+// stopBtn.onclick= e =>{
+//     mediaRecorder.stop();
+//     startBtn.classList.remove('is-danger');
+//     startBtn.innerText = 'Start';
+// };
 
 
 const { desktopCapturer, remote } = require('electron');
 const { Menu } = remote;
+
+
 //get the available video sources
 async function getVideoSources(){
     const inputSources = await desktopCapturer.getSources({
@@ -50,7 +62,6 @@ async function selectSource(source){
     videoSelectBtn.innerText = source.name;
 
     const constraintsVideo = {
-        audio : false,
         video: {
             mandatory:{
                 chromeMediaSource: 'desktop',
@@ -103,7 +114,8 @@ async function handleStop(e){
     const buffer = Buffer.from(await blob.arrayBuffer());
     const { filePath } = await dialog.showSaveDialog({
         buttonLabel : 'Save video',
-        defaultPath: 'vid-${Date.now()}.webm'
+        defaultPath: `vid-${Date.now()}.webm`   //Note that it is a backtick, not a quote
+
     });
     console.log(filePath);
     writeFile(filePath,buffer,()=> console.log('vide saved successfully!'));

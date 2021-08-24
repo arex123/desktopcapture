@@ -4,3 +4,19 @@ body {
   max-width: 38rem;
   padding: 2rem;
 }
+
+div{
+  margin: 12px;
+}
+.header{
+ display: flex;
+ justify-content: center;
+}
+
+.preview{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}

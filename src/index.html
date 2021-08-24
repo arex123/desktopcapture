@@ -2,20 +2,24 @@
 <html> 
   <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <title>Screen Recorder</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="index.css">
   </head>
   <body>
-    <h1>Eletron Screen Recorder</h1>
-    <video></video>
 
-    <button id="startBtn" class="button is-primary">Start</button>
-    <button id="stopBtn" class="button is-warning">Stop</button>
+    <h1 class="header">Screen Recorder</h1>
+    <video class="preview"></video>
 
+    <div class="d-grid gap-2 col-6 mx-auto">
+      <button id="startBtn"  class="btn btn-primary">Start</button>
+      <!-- <button id="stopBtn" class="btn btn-warning">Stop</button> -->
+    </div>
+      
     <hr/>
 
-    <button id="videoSelectBtn" class="button is-text">
+    <button id="videoSelectBtn" class="button is-text d-grid gap-2 col-4 mx-auto">
       Choose a Video Source
     </button>
   </body>
