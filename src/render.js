@@ -1,3 +1,6 @@
+//run this with npm start on terminal
+
+
 //buttons
 const videoElement = document.querySelector('video');
 const startBtn = document.getElementById('startBtn');
@@ -46,7 +49,7 @@ const recordedChunks = [];  //it will save chunks of video, we will save segment
 async function selectSource(source){
     videoSelectBtn.innerText = source.name;
 
-    const constraints = {
+    const constraintsVideo = {
         audio : false,
         video: {
             mandatory:{
@@ -56,13 +59,24 @@ async function selectSource(source){
         }
     };
 
+    const constraintsAudio={
+        audio:true,
+    }
+    const audioStream = await navigator.mediaDevices.getUserMedia(constraintsAudio)
+    const videoStream = await navigator.mediaDevices.getUserMedia(constraintsVideo)
+
+
+    const stream = new MediaStream([...videoStream.getVideoTracks(), ...audioStream.getAudioTracks()])
+
     //create a stream
-    const stream = await navigator.mediaDevices
-        .getUserMedia(constraints);
+    // const stream = await navigator.mediaDevices
+    //     .getUserMedia(constraints);
 
     //preview the source in a video element
-    videoElement.srcObject = stream;
-    videoElement.play();
+    videoElement.srcObject = stream
+    videoElement.muted = true
+    videoElement.play()
+    
 
     //create the media recorder
     const options = { mimeType: 'video/webm; codecs-vp9'};
